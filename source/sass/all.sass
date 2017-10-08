@@ -1,0 +1,63 @@
+@import "functions"
+@import "help/_variables.scss"
+@import "bootstrap"
+
+$check: #1aa589
+
+*
+  // border: 1px solid #000
+  
+body
+  background-color: $gray-300
+
+.list
+  box-shadow: 2px 2px 10px 0 rgba(black,0.3)
+
+input,a,p,.display-2,h4
+  font-weight: 100
+
+.newTodo
+  font-size: 2rem
+
+input::placeholder
+  color: $gray-200 !important
+  font-style: italic
+
+.border-bottom
+  border-bottom: 1px solid $gray-300
+  
+.active
+  text-decoration: line-through
+  text-decoration-color: $gray-500 
+  color: $gray-500 
+
+.checkbox_box
+  width: 2.5rem
+  height: 2.5rem
+  border: 1px solid $gray-500
+  border-radius: 50%
+  position: relative
+  &:after
+    content: "√"
+    // display: inline-block
+    position: absolute
+    top: 0
+    left: 0.7rem
+    font-size: 1.5rem
+    color: $check
+    font-weight: 100
+
+label
+  input+.checkbox_box
+    opacity: 0 
+  input:checked+.checkbox_box
+    opacity: 1 
+
+.cursor
+  cursor: pointer
+
+.btn-outline-lightPink:focus 
+  box-shadow: 0 0 0 1px rgba(175, 47, 47, 0.5)
+
+
+

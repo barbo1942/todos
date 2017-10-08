@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title todos
+    link(rel='stylesheet' href='css/all.css')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  body
+    #app
+      .display-2.text-center.text-lightPink.mt-5 {{title}}
+      
+      .container.w-75.px-0.mt-3
+        p.text-secondary.mb-1.mr-2.text-right {{remaining}} {{remaining | pluralize}} left in {{todos.length}}  {{todos.length | pluralize}} 
+        .list.bg-white
+          .input-group.border-bottom
+            .input-group-addon.bg-white.text-gray400.border-0.px-4
+              i.fa.fa-chevron-down(aria-hidden="true")
+            input.form-control.border-0.newTodo(type="text" v-model="newTodo" placeholder="Please enter items" @keyup.enter="addTodo(newTodo)")
+        
+          ul.list-unstyled.mb-0
+            li.border-bottom.p-3(v-for="(todo,id) in todos" v-if=" todo.completed!=tag")
+              .d-flex.align-items-center
+                label.m-0.cursor(:for="id")
+                  .d-flex.align-items-center
+                    input.d-none(type="checkbox" :id="id" v-model="todo.completed")
+                    .checkbox_box
+                    h4.mb-0.ml-3(:class="{active: todo.completed}") {{id+1}}. {{todo.content}}
+                h4.delete.text-deletePink.mb-0.ml-auto.cursor(@click="deleteTodo(id)") X
+
+          .control-panel.p-3(v-show="todos.length")
+            .row
+              .col-md-6.mb-3.mb-md-0
+                button.btn.btn-outline-lightPink.cursor.text-gray500.mr-2(@click="show(null)") All
+                button.btn.btn-outline-lightPink.cursor.text-gray500.mr-2(@click="show(true)") Done
+                button.btn.btn-outline-lightPink.cursor.text-gray500(@click="show(false)") Undone
+              .col-md-6
+                .d-flex.justify-content-start.justify-content-md-end
+                  button.btn.btn-outline-gray300.cursor.text-gray500.mr-2(@click="checkAll()") Check All
+                  button.btn.btn-outline-gray300.cursor.text-gray500(@click="deleteCompleted()" v-show="todos.length > remaining") Delete Completed
+        
+      .footer.text-center.text-secondary.mt-5
+        p.mb-0 vue@2.4.4, bootstrap@4.0.0-beta
+        p @2017
+    
+    script(src="js/venders.js")
+    script(src="js/all.js")
